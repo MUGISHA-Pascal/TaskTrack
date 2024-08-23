@@ -17,4 +17,5 @@ const todoSchema = new mongoose_1.Schema({
 }, {
     timestamps: true,
 });
-exports.default = (0, mongoose_1.model)("Todo", todoSchema);
+const Todo = (0, mongoose_1.model)("Todo", todoSchema);
+exports.default = Todo;

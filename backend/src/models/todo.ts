@@ -20,4 +20,5 @@ const todoSchema = new Schema(
     timestamps: true,
   }
 );
-export default model("Todo", todoSchema);
+const Todo = model<ITodo>("Todo", todoSchema);
+export default Todo;
