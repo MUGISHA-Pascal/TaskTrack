@@ -30,7 +30,8 @@ const add_task = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.add_task = add_task;
 const get_task = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const todos = yield todo_1.default.find();
+        const { id } = req.body;
+        const todos = yield todo_1.default.findById({ _id: id });
         res.status(201).json({ todos });
     }
     catch (error) {
@@ -43,9 +44,7 @@ const update_task = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const { name, description, status, id } = req.body;
         const updatetodo = yield todo_1.default.findByIdAndUpdate({ _id: id }, { name, description, status });
         const allTodos = yield todo_1.default.find();
-        res
-            .status(201)
-            .json({
+        res.status(201).json({
             message: "updated a todo",
             todo: updatetodo,
             allTodos: allTodos,

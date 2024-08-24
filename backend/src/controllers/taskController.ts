@@ -16,7 +16,8 @@ export const add_task = async (req: Request, res: Response) => {
 
 export const get_task = async (req: Request, res: Response) => {
   try {
-    const todos = await Todo.find();
+    const { id } = req.body;
+    const todos = await Todo.findById({ _id: id });
     res.status(201).json({ todos });
   } catch (error) {
     console.log(error);
@@ -31,13 +32,11 @@ export const update_task = async (req: Request, res: Response) => {
       { name, description, status }
     );
     const allTodos = await Todo.find();
-    res
-      .status(201)
-      .json({
-        message: "updated a todo",
-        todo: updatetodo,
-        allTodos: allTodos,
-      });
+    res.status(201).json({
+      message: "updated a todo",
+      todo: updatetodo,
+      allTodos: allTodos,
+    });
   } catch (error) {
     console.log(error);
   }
