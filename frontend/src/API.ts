@@ -10,8 +10,8 @@ export const add_task = async (todo: any) => {
     };
     const todos = await axios.post(`${baseURL}/add_task`, formData);
     return todos;
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    throw new Error(error);
   }
 };
 
@@ -19,7 +19,15 @@ export const get_task = async () => {
   try {
     const alltodos = await axios.get(`${baseURL}/get_task`);
     return alltodos;
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    throw new Error(error);
   }
 };
+
+// export const update_task = async (todo) => {
+// 	try {
+
+// 	} catch (error: any) {
+// 		throw new Error(error);
+// 	}
+// };
