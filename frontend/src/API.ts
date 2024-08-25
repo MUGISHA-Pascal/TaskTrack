@@ -1,14 +1,13 @@
 import axios from "axios";
-const baseURL = "http://localhost:3000/task/";
+const baseURL = "http://localhost:4000/task/";
 
 export const add_task = async (todo: any) => {
   try {
-    const formData = {
+    const todos = await axios.post(`${baseURL}add_task`, {
       name: todo.name,
       description: todo.description,
       status: false,
-    };
-    const todos = await axios.post(`${baseURL}/add_task`, formData);
+    });
     return todos;
   } catch (error: any) {
     throw new Error(error);
