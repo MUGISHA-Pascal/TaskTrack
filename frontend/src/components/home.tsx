@@ -9,7 +9,7 @@ const Home = () => {
       <Navbar />
       <div className="flex flex-col justify-center items-center">
         <Addtask />
-        <Alltasks />
+        {/* <Alltasks /> */}
       </div>
     </>
   );

@@ -5,15 +5,15 @@ const todoSchema = new Schema(
   {
     name: {
       type: String,
-      required: true,
+      // required: true,
     },
     description: {
       type: String,
-      required: true,
+      // required: true,
     },
     status: {
       type: Boolean,
-      required: true,
+      // required: true,
     },
   },
   {

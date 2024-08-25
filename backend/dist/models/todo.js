@@ -4,15 +4,15 @@ const mongoose_1 = require("mongoose");
 const todoSchema = new mongoose_1.Schema({
     name: {
         type: String,
-        required: true,
+        // required: true,
     },
     description: {
         type: String,
-        required: true,
+        // required: true,
     },
     status: {
         type: Boolean,
-        required: true,
+        // required: true,
     },
 }, {
     timestamps: true,

@@ -2,7 +2,9 @@ import React from "react";
 import Home from "./components/home";
 
 const App: React.FC = () => {
-  return <Home />;
+  return (
+    
+  );
 };
 
 export default App;

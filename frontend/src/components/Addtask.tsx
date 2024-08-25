@@ -8,6 +8,15 @@ const Addtask = () => {
     name: "",
     description: "",
   });
+  const baseURL = "http://localhost:4000/task/";
+  const [todos, setTodos] = useState([]);
+  useEffect(() => {
+    fetch(`${baseURL}get_all_task`)
+      .then((response) => response.json())
+      .then((data) => {
+        setTodos(data.todos);
+      });
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     await e.preventDefault();
