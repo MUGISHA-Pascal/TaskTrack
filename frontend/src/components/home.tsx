@@ -7,8 +7,10 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <Addtask />
-      <Alltasks />
+      <div className="flex flex-col justify-center items-center">
+        <Addtask />
+        <Alltasks />
+      </div>
     </>
   );
 };

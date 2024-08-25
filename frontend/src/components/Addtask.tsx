@@ -17,7 +17,7 @@ const Addtask = () => {
               type="text"
               name="name"
               id="name"
-              className="shadow-md rounded-lg p-2 focus:outline-none mr-4"
+              className="shadow-md border-2 border-gray-500 rounded-lg pl-2 pr-2 h-8 focus:outline-none mr-4"
             />
             <label htmlFor="description" className="font-bold mr-4">
               description:
@@ -26,7 +26,7 @@ const Addtask = () => {
               type="text"
               name="description"
               id="description"
-              className="shadow-md rounded-lg p-2 focus:outline-none mr-4"
+              className="shadow-md border-2 border-gray-500 rounded-lg pl-2 pr-2 h-8 focus:outline-none mr-4"
             />
             <button className="bg-gray-500 pl-4 pr-4 h-8 text-sm hover:opacity-70 font-bold text-white rounded-xl">
               add task
