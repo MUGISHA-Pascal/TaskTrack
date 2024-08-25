@@ -17,7 +17,7 @@ export const add_task = async (todo: any) => {
 
 export const get_task = async () => {
   try {
-    const alltodos = await axios.get(`${baseURL}/get_task`);
+    const alltodos: ITodo[] = await axios.get(`${baseURL}/get_task`);
     return alltodos;
   } catch (error: any) {
     throw new Error(error);

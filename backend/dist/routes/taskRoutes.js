@@ -7,4 +7,5 @@ taskRoutes.post("/add_task", taskController_1.add_task);
 taskRoutes.get("/get_task", taskController_1.get_task);
 taskRoutes.put("/update_task", taskController_1.update_task);
 taskRoutes.delete("/delete_task", taskController_1.delete_task);
+taskRoutes.get("/get_all_task", taskController_1.get_all_task);
 exports.default = taskRoutes;

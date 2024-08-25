@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.delete_task = exports.update_task = exports.get_task = exports.add_task = void 0;
+exports.delete_task = exports.update_task = exports.get_all_task = exports.get_task = exports.add_task = void 0;
 const todo_1 = __importDefault(require("../models/todo"));
 const add_task = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -39,6 +39,16 @@ const get_task = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.get_task = get_task;
+const get_all_task = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const todos = yield todo_1.default.find();
+        res.status(201).json({ todos });
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.get_all_task = get_all_task;
 const update_task = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name, description, status, id } = req.body;

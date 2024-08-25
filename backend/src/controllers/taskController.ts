@@ -24,6 +24,15 @@ export const get_task = async (req: Request, res: Response) => {
   }
 };
 
+export const get_all_task = async (req: Request, res: Response) => {
+  try {
+    const todos = await Todo.find();
+    res.status(201).json({ todos });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const update_task = async (req: Request, res: Response) => {
   try {
     const { name, description, status, id } = req.body;
