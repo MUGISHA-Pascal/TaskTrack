@@ -1,11 +1,28 @@
 import React, { FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 const baseURL = "http://localhost:4000/auth";
+
+interface ErrorResponse {
+  message?: string;
+  code?: number;
+  details?: Record<string, any>;
+  username?: string;
+  email?: string;
+  password?: string;
+  errors: {
+    username: string;
+    email: string;
+    password: string;
+  };
+}
 
 const Signup = () => {
   const [password, setpwd] = useState("");
   const [username, setname] = useState("");
   const [email, setemail] = useState("");
+
+  const navigate = useNavigate();
 
   const handlesubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -16,7 +33,32 @@ const Signup = () => {
       },
       body: JSON.stringify({ username, email, password }),
     });
+
+    // if (response.ok) {
+    //   navigate("/login");
+    // }
+    // if (!response.ok) {
+    const errRes: ErrorResponse = await response.json();
+    // console.log(errRes.errors);
+
+    const usernameErrElement = document.getElementById("usernameError");
+    const emailErrElement = document.getElementById("emailError");
+    const passwdErrElement = document.getElementById("passwordError");
+
+    if (usernameErrElement && errRes.errors.username) {
+      usernameErrElement.innerHTML = errRes.errors.username;
+    }
+
+    if (emailErrElement && errRes.errors.email) {
+      emailErrElement.innerHTML = errRes.errors.email;
+    }
+
+    if (passwdErrElement && errRes.errors.password) {
+      passwdErrElement.innerHTML = errRes.errors.password;
+    }
+    // }
   };
+
   return (
     <>
       <section className="flex justify-center items-center">
@@ -41,6 +83,7 @@ const Signup = () => {
               className="h-8 w-60 rounded-xl focus:outline-none pl-2"
             />
           </div>
+          <p id="usernameError" className="font-bold text-red-500"></p>
 
           <div className="mb-4 flex items-center space-x-4">
             <label htmlFor="email" className="text-sm w-24 text-right">
@@ -57,7 +100,6 @@ const Signup = () => {
               className="h-8 w-60 rounded-xl focus:outline-none pl-2"
             />
           </div>
-
           <p id="emailError" className="font-bold text-red-500"></p>
 
           <div className="mb-4 flex items-center space-x-4">
@@ -75,7 +117,6 @@ const Signup = () => {
               className="h-8 w-60 rounded-xl focus:outline-none pl-2"
             />
           </div>
-
           <p id="passwordError" className="font-bold text-red-500"></p>
 
           <div className="flex flex-row space-x-4 items-center">
@@ -86,7 +127,7 @@ const Signup = () => {
               signup
             </button>
             <p className="mt-2 text-sm text-gray-600">
-              arleady have an account{" "}
+              Already have an account{" "}
               <Link to="/login" className="text-blue-500 underline ">
                 login
               </Link>

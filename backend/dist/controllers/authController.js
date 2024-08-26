@@ -17,6 +17,14 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_1 = __importDefault(require("../models/user"));
 const keys_1 = __importDefault(require("../keys"));
 const maxAge = 3 * 24 * 60 * 60;
+const handleError = (err) => {
+    const errors = { username: "", email: "", password: "" };
+    // if (err.message.includes("User validation failed")) {
+    Object.values(err.errors).forEach(({ properties }) => {
+        errors[properties.path] = properties.message;
+    });
+    return errors;
+};
 const createToken = (id) => {
     return jsonwebtoken_1.default.sign({ id }, keys_1.default.jwt_key, { expiresIn: "1h" });
 };
@@ -31,7 +39,7 @@ const signup_post = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.json({ user });
     }
     catch (error) {
-        console.log(error);
+        res.json({ errors: handleError(error) });
     }
 });
 exports.signup_post = signup_post;

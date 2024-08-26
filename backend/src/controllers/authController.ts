@@ -10,6 +10,19 @@ interface user {
   password: string;
   _id: string;
 }
+interface err {
+  username: string;
+  email: string;
+  password: string;
+}
+const handleError = (err: any) => {
+  const errors: err = { username: "", email: "", password: "" };
+  // if (err.message.includes("User validation failed")) {
+  Object.values(err.errors).forEach(({ properties }) => {
+    errors[properties.path] = properties.message;
+  });
+  return errors;
+};
 
 const createToken = (id: string): string => {
   return jwt.sign({ id }, keys.jwt_key, { expiresIn: "1h" });
@@ -25,6 +38,6 @@ export const signup_post = async (req: Request, res: Response) => {
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.json({ user });
   } catch (error) {
-    console.log(error);
+    res.json({ errors: handleError(error) });
   }
 };
