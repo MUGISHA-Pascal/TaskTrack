@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import Addtask from "./Addtask";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import Login from "./login";
+import Signup from "./signup";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
           <Routes>
             <Route path="/tasks" element={<Addtask />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
           </Routes>
         </div>
       </Router>
