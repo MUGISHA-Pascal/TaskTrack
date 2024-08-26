@@ -71,7 +71,18 @@ const Addtask: React.FC = () => {
     const resu = await pos.json();
     const updatedTasks = await fetch(`${baseURL}/get_all_task`);
     const updatedData = await updatedTasks.json();
-    // console.log("Updated tasks:", updatedData.todos);
+    setTodos(updatedData.todos);
+  };
+
+  const handleDelete = async (id: string) => {
+    const response = await fetch(`${baseURL}/delete_task`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
+    const updatedTasks = await fetch(`${baseURL}/get_all_task`);
+    const updatedData = await updatedTasks.json();
+
     setTodos(updatedData.todos);
   };
 
@@ -125,7 +136,13 @@ const Addtask: React.FC = () => {
             className="flex flex-row w-[725px] p-4 justify-between border-2 border-gray-200 shadow-md"
           >
             <div>
-              <h2 className="text-gray-500 font-bold">{todo.name}</h2>
+              <h2
+                className={`text-gray-500 font-bold  ${
+                  todo.status ? "line-through" : ""
+                } `}
+              >
+                {todo.name}
+              </h2>
               <p
                 className={`font-thin text-sm ${
                   todo.status ? "line-through" : ""
@@ -143,7 +160,12 @@ const Addtask: React.FC = () => {
               >
                 Complete
               </button>
-              <button className="bg-gray-500 pl-4 pr-4 h-8 text-sm hover:opacity-70 font-bold text-white rounded-xl">
+              <button
+                className="bg-gray-500 pl-4 pr-4 h-8 text-sm hover:opacity-70 font-bold text-white rounded-xl"
+                onClick={() => {
+                  handleDelete(todo._id);
+                }}
+              >
                 Remove Task
               </button>
             </div>
