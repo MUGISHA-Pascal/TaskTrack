@@ -1,35 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { add_task } from "../API";
+import { response } from "express";
+import React, { FormEvent, useEffect, useState } from "react";
 
 const Addtask = () => {
-  const [description, setdescription] = useState("");
+  const baseURL = "http://localhost:4000/task";
   const [name, setname] = useState("");
-  const [todo, setodo] = useState({
+  const [description, setdescription] = useState("");
+  const [todos, setTodo] = useState([]);
+  const [postTodo, setPostTodo] = useState({
     name: "",
     description: "",
+    status: false,
   });
-  const baseURL = "http://localhost:4000/task/";
-  const [todos, setTodos] = useState([]);
+
   useEffect(() => {
-    fetch(`${baseURL}get_all_task`)
+    fetch(`${baseURL}/get_all_task`)
       .then((response) => response.json())
-      .then((data) => {
-        setTodos(data.todos);
+      .then((data) => setTodo(data.todos))
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    await e.preventDefault();
-    setodo({
-      name: name,
-      description: description,
-    });
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setPostTodo({ name: name, description: description, status: false });
+    useEffect(() => {
+      fetch(`${baseURL}/add_task`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(postTodo),
+      });
+    }, [postTodo]);
   };
-  useEffect(() => {
-    if (todo) {
-      add_task(todo);
-    }
-  }, []);
 
   return (
     <>
@@ -74,6 +76,28 @@ const Addtask = () => {
             </button>
           </div>
         </form>
+      </section>
+      <section className="flex flex-col justify-center mt-10 space-y-4 items-center border-2 w-[725px] border-t-gray-500">
+        <h2 className="text-gray-500 font-bold text-xl mt-4 mb-4"> My tasks</h2>
+        {todos.map((todo: any) => (
+          <div
+            key={todo._id}
+            className="flex flex-row w-[725px] p-4 justify-between border-2 border-gray-200  shadow-md"
+          >
+            <div>
+              <h2 className="text-gray-500 font-bold">{todo.name}</h2>
+              <p className="font-thin text-sm">{todo.description}</p>
+            </div>
+            <div>
+              <button className="border-2 border-gray-500 text-gray-500 mr-4 pl-4 pr-4 h-8 text-sm hover:opacity-70 font-bold rounded-xl">
+                complete
+              </button>
+              <button className="bg-gray-500 pl-4 pr-4 h-8 text-sm hover:opacity-70 font-bold text-white rounded-xl">
+                remove task
+              </button>
+            </div>
+          </div>
+        ))}
       </section>
     </>
   );
