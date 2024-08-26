@@ -1,4 +1,4 @@
-import { response } from "express";
+// import { response } from "express";
 import React, { FormEvent, useEffect, useState } from "react";
 
 const Addtask = () => {
@@ -24,13 +24,14 @@ const Addtask = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setPostTodo({ name: name, description: description, status: false });
-    useEffect(() => {
-      fetch(`${baseURL}/add_task`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(postTodo),
-      });
-    }, [postTodo]);
+
+    const postData = await fetch(`${baseURL}/add_task`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(postTodo),
+    });
+    const results = await postData.json();
+    console.log(results);
   };
 
   return (
@@ -79,7 +80,7 @@ const Addtask = () => {
       </section>
       <section className="flex flex-col justify-center mt-10 space-y-4 items-center border-2 w-[725px] border-t-gray-500">
         <h2 className="text-gray-500 font-bold text-xl mt-4 mb-4"> My tasks</h2>
-        {todos.map((todo: any) => (
+        {todos.map((todo: ITodo) => (
           <div
             key={todo._id}
             className="flex flex-row w-[725px] p-4 justify-between border-2 border-gray-200  shadow-md"

@@ -4,6 +4,9 @@ import Todo from "../models/todo";
 export const add_task = async (req: Request, res: Response) => {
   try {
     const { name, description, status } = req.body;
+    if (name == "" && description == "" && status == false) {
+      process.exit();
+    }
     const todos = await new Todo({ name, description, status }).save();
     const allTodos = await Todo.find();
     res

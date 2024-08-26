@@ -17,6 +17,9 @@ const todo_1 = __importDefault(require("../models/todo"));
 const add_task = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name, description, status } = req.body;
+        if (name == "" && description == "" && status == false) {
+            process.exit();
+        }
         const todos = yield new todo_1.default({ name, description, status }).save();
         const allTodos = yield todo_1.default.find();
         res
