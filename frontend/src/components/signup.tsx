@@ -1,11 +1,29 @@
-import React from "react";
+import React, { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
+const baseURL = "http://localhost:4000/auth";
 
 const Signup = () => {
+  const [password, setpwd] = useState("");
+  const [username, setname] = useState("");
+  const [email, setemail] = useState("");
+
+  const handlesubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    const response = await fetch(`${baseURL}/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, email, password }),
+    });
+  };
   return (
     <>
       <section className="flex justify-center items-center">
-        <form className="bg-gray-200 pr-8 pl-8 p-4 mt-20 flex flex-col justify-center items-center rounded-xl">
+        <form
+          className="bg-gray-200 pr-8 pl-8 p-4 mt-20 flex flex-col justify-center items-center rounded-xl"
+          onSubmit={handlesubmit}
+        >
           <h2 className="font-bold text-xl mb-10">Signup</h2>
 
           <div className="mb-4 flex items-center space-x-4">
@@ -16,6 +34,10 @@ const Signup = () => {
               type="text"
               id="username"
               name="username"
+              value={username}
+              onChange={(e) => {
+                setname(e.target.value);
+              }}
               className="h-8 w-60 rounded-xl focus:outline-none pl-2"
             />
           </div>
@@ -26,6 +48,10 @@ const Signup = () => {
             </label>
             <input
               type="text"
+              value={email}
+              onChange={(e) => {
+                setemail(e.target.value);
+              }}
               id="email"
               name="email"
               className="h-8 w-60 rounded-xl focus:outline-none pl-2"
@@ -41,6 +67,10 @@ const Signup = () => {
             <input
               type="password"
               id="password"
+              value={password}
+              onChange={(e) => {
+                setpwd(e.target.value);
+              }}
               name="password"
               className="h-8 w-60 rounded-xl focus:outline-none pl-2"
             />
