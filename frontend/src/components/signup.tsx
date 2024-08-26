@@ -7,13 +7,10 @@ interface ErrorResponse {
   message?: string;
   code?: number;
   details?: Record<string, any>;
-  username?: string;
-  email?: string;
-  password?: string;
   errors: {
-    username: string;
-    email: string;
-    password: string;
+    username?: string;
+    email?: string;
+    password?: string;
   };
 }
 
@@ -26,6 +23,16 @@ const Signup = () => {
 
   const handlesubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    // Clear any previous errors
+    const usernameErrElement = document.getElementById("usernameError");
+    const emailErrElement = document.getElementById("emailError");
+    const passwdErrElement = document.getElementById("passwordError");
+
+    if (usernameErrElement) usernameErrElement.innerHTML = "";
+    if (emailErrElement) emailErrElement.innerHTML = "";
+    if (passwdErrElement) passwdErrElement.innerHTML = "";
+
     const response = await fetch(`${baseURL}/signup`, {
       method: "POST",
       headers: {
@@ -34,29 +41,23 @@ const Signup = () => {
       body: JSON.stringify({ username, email, password }),
     });
 
-    // if (response.ok) {
-    //   navigate("/login");
-    // }
-    // if (!response.ok) {
-    const errRes: ErrorResponse = await response.json();
-    // console.log(errRes.errors);
+    if (response.ok) {
+      const errRes: ErrorResponse = await response.json();
 
-    const usernameErrElement = document.getElementById("usernameError");
-    const emailErrElement = document.getElementById("emailError");
-    const passwdErrElement = document.getElementById("passwordError");
+      if (usernameErrElement && errRes.errors.username) {
+        usernameErrElement.innerHTML = errRes.errors.username;
+      }
 
-    if (usernameErrElement && errRes.errors.username) {
-      usernameErrElement.innerHTML = errRes.errors.username;
+      if (emailErrElement && errRes.errors.email) {
+        emailErrElement.innerHTML = errRes.errors.email;
+      }
+
+      if (passwdErrElement && errRes.errors.password) {
+        passwdErrElement.innerHTML = errRes.errors.password;
+      }
+    } else {
+      navigate("/login");
     }
-
-    if (emailErrElement && errRes.errors.email) {
-      emailErrElement.innerHTML = errRes.errors.email;
-    }
-
-    if (passwdErrElement && errRes.errors.password) {
-      passwdErrElement.innerHTML = errRes.errors.password;
-    }
-    // }
   };
 
   return (
