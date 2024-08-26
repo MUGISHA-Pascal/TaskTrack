@@ -4,9 +4,6 @@ import Todo from "../models/todo";
 export const add_task = async (req: Request, res: Response) => {
   try {
     const { name, description, status } = req.body;
-    if (name == "" && description == "" && status == false) {
-      process.exit();
-    }
     const todos = await new Todo({ name, description, status }).save();
     const allTodos = await Todo.find();
     res
@@ -61,4 +58,14 @@ export const delete_task = async (req: Request, res: Response) => {
   res
     .status(201)
     .json({ message: "updated a todo", todo: deletedTask, allTodos: allTodos });
+};
+
+export const update_status = async (req: Request, res: Response) => {
+  try {
+    const { id, status } = req.body;
+    const updatestatus = await Todo.findByIdAndUpdate({ _id: id }, { status });
+    await res.json({ updatestatus });
+  } catch (error) {
+    console.log(error);
+  }
 };
