@@ -1,11 +1,19 @@
-import React from "react";
+import React, { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+  const [password, setpwd] = useState("");
+  const [username, setname] = useState("");
+  const handlesubmit = async (e: FormEvent) => {
+    e.preventDefault();
+  };
   return (
     <>
       <section className="flex justify-center items-center">
-        <form className="bg-gray-200 pr-8 pl-8 p-4 mt-20 flex flex-col justify-center items-center rounded-xl">
+        <form
+          className="bg-gray-200 pr-8 pl-8 p-4 mt-20 flex flex-col justify-center items-center rounded-xl"
+          onSubmit={handlesubmit}
+        >
           <h2 className="font-bold text-xl mb-10">Login</h2>
 
           <div className="mb-4 flex items-center space-x-4">
@@ -14,6 +22,10 @@ const Login = () => {
             </label>
             <input
               type="text"
+              value={username}
+              onChange={(e) => {
+                setname(e.target.value);
+              }}
               id="username"
               name="username"
               className="h-8 w-60 rounded-xl focus:outline-none pl-2"
@@ -28,6 +40,10 @@ const Login = () => {
             </label>
             <input
               type="password"
+              value={password}
+              onChange={(e) => {
+                setpwd(e.target.value);
+              }}
               id="password"
               name="password"
               className="h-8 w-60 rounded-xl focus:outline-none pl-2"

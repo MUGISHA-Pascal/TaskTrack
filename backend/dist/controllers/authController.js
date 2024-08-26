@@ -18,17 +18,25 @@ const user_1 = __importDefault(require("../models/user"));
 const keys_1 = __importDefault(require("../keys"));
 const maxAge = 3 * 24 * 60 * 60;
 const handleError = (err) => {
-    const errors = { username: "", email: "", password: "" };
-    // if (err.message.includes("User validation failed")) {
-    Object.values(err.errors).forEach(({ properties }) => {
-        errors[properties.path] = properties.message;
-    });
+    const errors = {};
+    if (err.message.includes("User validation failed")) {
+        Object.values(err.errors).forEach(({ properties }) => {
+            errors[properties.path] = properties.message;
+        });
+    }
     return errors;
 };
 const createToken = (id) => {
     return jsonwebtoken_1.default.sign({ id }, keys_1.default.jwt_key, { expiresIn: "1h" });
 };
-const login_post = (req, res) => { };
+const login_post = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        // Add your login logic here
+    }
+    catch (error) {
+        res.status(500).json({ errors: handleError(error) });
+    }
+});
 exports.login_post = login_post;
 const signup_post = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -39,7 +47,7 @@ const signup_post = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.json({ user });
     }
     catch (error) {
-        res.json({ errors: handleError(error) });
+        res.status(400).json({ errors: handleError(error) });
     }
 });
 exports.signup_post = signup_post;
