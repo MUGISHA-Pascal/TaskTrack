@@ -27,9 +27,12 @@ const createToken = (id: string): string => {
 
 export const login_post = async (req: Request, res: Response) => {
   try {
-    // Add your login logic here
+    const { username, password } = req.body;
+    const user = await User.login(username, password);
+    const token = createToken(user._id);
+    res.cookie("jwt", token, { maxAge: maxAge * 1000 });
   } catch (error) {
-    res.status(500).json({ errors: handleError(error) });
+    res.json({ errors: handleError(error) });
   }
 };
 
@@ -41,6 +44,6 @@ export const signup_post = async (req: Request, res: Response) => {
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.json({ user });
   } catch (error) {
-    res.status(400).json({ errors: handleError(error) });
+    res.json({ errors: handleError(error) });
   }
 };

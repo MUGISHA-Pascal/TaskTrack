@@ -26,6 +26,20 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+userSchema.statics.login = async function ({ username, password }) {
+  const user = await User.findOne({ username });
+  if (user) {
+    const auth = await bcrypt.compare(password, user.password);
+    if (auth) {
+      return user;
+    } else {
+      throw Error("invalid email");
+    }
+  } else {
+    throw Error("invalid username");
+  }
+};
+
 const User = model("User", userSchema);
 
 export default User;

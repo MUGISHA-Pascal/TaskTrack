@@ -31,10 +31,13 @@ const createToken = (id) => {
 };
 const login_post = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // Add your login logic here
+        const { username, password } = req.body;
+        const user = yield user_1.default.login(username, password);
+        const token = createToken(user._id);
+        res.cookie("jwt", token, { maxAge: maxAge * 1000 });
     }
     catch (error) {
-        res.status(500).json({ errors: handleError(error) });
+        res.json({ errors: handleError(error) });
     }
 });
 exports.login_post = login_post;
@@ -47,7 +50,7 @@ const signup_post = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.json({ user });
     }
     catch (error) {
-        res.status(400).json({ errors: handleError(error) });
+        res.json({ errors: handleError(error) });
     }
 });
 exports.signup_post = signup_post;

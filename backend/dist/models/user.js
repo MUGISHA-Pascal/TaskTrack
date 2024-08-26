@@ -38,5 +38,22 @@ userSchema.pre("save", function (next) {
         next();
     });
 });
+userSchema.statics.login = function (_a) {
+    return __awaiter(this, arguments, void 0, function* ({ username, password }) {
+        const user = yield User.findOne({ username });
+        if (user) {
+            const auth = yield bcrypt_1.default.compare(password, user.password);
+            if (auth) {
+                return user;
+            }
+            else {
+                throw Error("invalid email");
+            }
+        }
+        else {
+            throw Error("invalid username");
+        }
+    });
+};
 const User = (0, mongoose_1.model)("User", userSchema);
 exports.default = User;

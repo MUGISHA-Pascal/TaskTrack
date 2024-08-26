@@ -1,11 +1,21 @@
 import React, { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
+const baseURL = "http://localhost:4000/auth";
 
 const Login = () => {
   const [password, setpwd] = useState("");
   const [username, setname] = useState("");
   const handlesubmit = async (e: FormEvent) => {
     e.preventDefault();
+    const response = await fetch(`${baseURL}/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    });
+    const result = await response.json();
+    console.log(result);
   };
   return (
     <>
