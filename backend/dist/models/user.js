@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
-const bcrypt_1 = __importDefault(require("bcrypt"));
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const isEmail_1 = __importDefault(require("validator/lib/isEmail"));
 const userSchema = new mongoose_1.Schema({
     username: {
@@ -33,27 +33,10 @@ const userSchema = new mongoose_1.Schema({
 });
 userSchema.pre("save", function (next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const salt = yield bcrypt_1.default.genSalt();
-        this.password = yield bcrypt_1.default.hash(this.password, salt);
+        const salt = yield bcryptjs_1.default.genSalt();
+        this.password = yield bcryptjs_1.default.hash(this.password, salt);
         next();
     });
 });
-userSchema.statics.login = function (_a) {
-    return __awaiter(this, arguments, void 0, function* ({ username, password }) {
-        const user = yield User.findOne({ username });
-        if (user) {
-            const auth = yield bcrypt_1.default.compare(password, user.password);
-            if (auth) {
-                return user;
-            }
-            else {
-                throw Error("invalid email");
-            }
-        }
-        else {
-            throw Error("invalid username");
-        }
-    });
-};
 const User = (0, mongoose_1.model)("User", userSchema);
 exports.default = User;

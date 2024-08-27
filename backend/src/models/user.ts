@@ -1,8 +1,18 @@
-import { model, Schema } from "mongoose";
-import bcrypt from "bcrypt";
+import { model, Schema, Document, Model } from "mongoose";
+import bcrypt from "bcryptjs";
 import isEmail from "validator/lib/isEmail";
 
-const userSchema = new Schema({
+interface usercre extends Document {
+  username: string;
+  email: string | null;
+  password: string;
+}
+
+interface userModel extends Model<usercre> {
+  login(username: string, password: string): Promise<usercre>;
+}
+
+const userSchema = new Schema<usercre>({
   username: {
     type: String,
     required: [true, "please enter the username"],
@@ -10,7 +20,6 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: [true, "please enter the password"],
-
     minLength: [6, "the password is not six characters"],
   },
   email: {
@@ -26,20 +35,6 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-userSchema.statics.login = async function ({ username, password }) {
-  const user = await User.findOne({ username });
-  if (user) {
-    const auth = await bcrypt.compare(password, user.password);
-    if (auth) {
-      return user;
-    } else {
-      throw Error("invalid email");
-    }
-  } else {
-    throw Error("invalid username");
-  }
-};
-
-const User = model("User", userSchema);
+const User = model<usercre, userModel>("User", userSchema);
 
 export default User;

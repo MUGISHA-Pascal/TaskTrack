@@ -2,6 +2,7 @@ import { Response, Request } from "express";
 import jwt from "jsonwebtoken";
 import User from "../models/user";
 import keys from "../keys";
+import bcrypt from "bcryptjs";
 
 const maxAge = 3 * 24 * 60 * 60;
 
@@ -28,11 +29,24 @@ const createToken = (id: string): string => {
 export const login_post = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
-    const user = await User.login(username, password);
-    const token = createToken(user._id);
+
+    const user = await User.findOne({ username });
+    if (!user) {
+      throw new Error("Invalid username");
+    }
+
+    const auth = await bcrypt.compare(password, user.password);
+    if (!auth) {
+      throw new Error("Invalid password");
+    }
+
+    const token = createToken(user._id.toString());
     res.cookie("jwt", token, { maxAge: maxAge * 1000 });
+    console.log("Login successful");
+    res.status(200).json({ user });
   } catch (error) {
-    res.json({ errors: handleError(error) });
+    console.log(error);
+    res.status(400).json({ errors: handleError(error) });
   }
 };
 
@@ -42,8 +56,9 @@ export const signup_post = async (req: Request, res: Response) => {
     const user = await new User({ username, email, password }).save();
     const token = createToken(user._id.toString());
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.json({ user });
+    res.status(201).json({ user });
   } catch (error) {
-    res.json({ errors: handleError(error) });
+    console.log(error);
+    res.status(400).json({ errors: handleError(error) });
   }
 };

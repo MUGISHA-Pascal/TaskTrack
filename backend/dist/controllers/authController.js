@@ -16,6 +16,7 @@ exports.signup_post = exports.login_post = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_1 = __importDefault(require("../models/user"));
 const keys_1 = __importDefault(require("../keys"));
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const maxAge = 3 * 24 * 60 * 60;
 const handleError = (err) => {
     const errors = {};
@@ -32,12 +33,22 @@ const createToken = (id) => {
 const login_post = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { username, password } = req.body;
-        const user = yield user_1.default.login(username, password);
-        const token = createToken(user._id);
+        const user = yield user_1.default.findOne({ username });
+        if (!user) {
+            throw new Error("Invalid username");
+        }
+        const auth = yield bcryptjs_1.default.compare(password, user.password);
+        if (!auth) {
+            throw new Error("Invalid password");
+        }
+        const token = createToken(user._id.toString());
         res.cookie("jwt", token, { maxAge: maxAge * 1000 });
+        console.log("Login successful");
+        res.status(200).json({ user });
     }
     catch (error) {
-        res.json({ errors: handleError(error) });
+        console.log(error);
+        res.status(400).json({ errors: handleError(error) });
     }
 });
 exports.login_post = login_post;
@@ -47,10 +58,11 @@ const signup_post = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const user = yield new user_1.default({ username, email, password }).save();
         const token = createToken(user._id.toString());
         res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-        res.json({ user });
+        res.status(201).json({ user });
     }
     catch (error) {
-        res.json({ errors: handleError(error) });
+        console.log(error);
+        res.status(400).json({ errors: handleError(error) });
     }
 });
 exports.signup_post = signup_post;
