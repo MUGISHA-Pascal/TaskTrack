@@ -42,7 +42,7 @@ export const login_post = async (req: Request, res: Response) => {
 
     const token = createToken(user._id.toString());
     res.cookie("jwt", token, { maxAge: maxAge * 1000 });
-    console.log("Login successful");
+    console.log(token);
     res.status(200).json({ user });
   } catch (error) {
     console.log(error);

@@ -43,7 +43,7 @@ const login_post = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         }
         const token = createToken(user._id.toString());
         res.cookie("jwt", token, { maxAge: maxAge * 1000 });
-        console.log("Login successful");
+        console.log(token);
         res.status(200).json({ user });
     }
     catch (error) {

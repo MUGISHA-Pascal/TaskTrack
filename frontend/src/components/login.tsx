@@ -1,8 +1,9 @@
 import React, { FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const baseURL = "http://localhost:4000/auth";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [password, setpwd] = useState("");
   const [username, setname] = useState("");
   const handlesubmit = async (e: FormEvent) => {
@@ -10,12 +11,14 @@ const Login = () => {
     const response = await fetch(`${baseURL}/login`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "applicati on/json",
       },
       body: JSON.stringify({ username, password }),
     });
     const result = await response.json();
-    console.log(result);
+    if (response.ok) {
+      navigate("/tasks");
+    }
   };
   return (
     <>
