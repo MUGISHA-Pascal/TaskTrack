@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { ErrorResponse, Link, useNavigate } from "react-router-dom";
 const baseURL = "http://localhost:4000/auth";
 
 const Login = () => {
@@ -15,9 +15,26 @@ const Login = () => {
       },
       body: JSON.stringify({ username, password }),
     });
-    const result = await response.json();
+
     if (response.ok) {
-      navigate("/tasks");
+      const result = await response.json();
+      if (result) {
+        navigate("/tasks");
+      }
+    } else {
+      const err: { errors: any } = await response.json();
+      const usernameErrElement = document.getElementById("usernameError");
+      const passwdErrElement = document.getElementById("passwordError");
+
+      if (usernameErrElement) usernameErrElement.innerHTML = "";
+      if (passwdErrElement) passwdErrElement.innerHTML = "";
+
+      if (usernameErrElement && err.errors.username) {
+        usernameErrElement.innerHTML = err.errors.username;
+      }
+      if (passwdErrElement && err.errors.password) {
+        passwdErrElement.innerHTML = err.errors.password;
+      }
     }
   };
   return (

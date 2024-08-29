@@ -16,7 +16,6 @@ exports.signup_post = exports.login_post = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_1 = __importDefault(require("../models/user"));
 const keys_1 = __importDefault(require("../keys"));
-const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const maxAge = 3 * 24 * 60 * 60;
 const handleError = (err) => {
     const errors = {};
@@ -43,21 +42,14 @@ const createToken = (id) => {
 const login_post = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { username, password } = req.body;
-        const user = yield user_1.default.findOne({ username });
-        if (!user) {
-            throw Error("incorrect username");
-        }
-        const auth = yield bcryptjs_1.default.compare(password, user.password);
-        if (!auth) {
-            throw Error("incorrect password");
-        }
+        const user = yield user_1.default.login(username, password);
         const token = createToken(user._id.toString());
         res.cookie("jwt", token, { maxAge: maxAge * 1000 });
         console.log(token);
         res.status(200).json({ user });
     }
     catch (error) {
-        console.log(error);
+        console.log(handleError(error));
         res.status(400).json({ errors: handleError(error) });
     }
 });

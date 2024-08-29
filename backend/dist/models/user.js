@@ -41,6 +41,7 @@ userSchema.pre("save", function (next) {
 userSchema.statics.login = function (username, password) {
     return __awaiter(this, void 0, void 0, function* () {
         const user = yield this.findOne({ username });
+        console.log(user);
         if (user) {
             const auth = yield bcryptjs_1.default.compare(password, user.password);
             if (auth) {
