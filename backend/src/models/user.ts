@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import isEmail from "validator/lib/isEmail";
 
 interface usercre extends Document {
+  _id: string;
   username: string;
   email: string | null;
   password: string;

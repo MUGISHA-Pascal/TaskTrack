@@ -14,11 +14,17 @@ interface UserErrors {
 
 const handleError = (err: any): UserErrors => {
   const errors: UserErrors = {};
+
   if (err.message.includes("User validation failed")) {
-    Object.values(err.errors).forEach(({ properties }: any) => {
+    const errorValues = Object.values(err.errors) as Array<{
+      properties: { path: keyof UserErrors; message: string };
+    }>;
+
+    errorValues.forEach(({ properties }) => {
       errors[properties.path] = properties.message;
     });
   }
+
   return errors;
 };
 

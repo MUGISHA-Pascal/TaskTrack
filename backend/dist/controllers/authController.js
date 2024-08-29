@@ -21,7 +21,8 @@ const maxAge = 3 * 24 * 60 * 60;
 const handleError = (err) => {
     const errors = {};
     if (err.message.includes("User validation failed")) {
-        Object.values(err.errors).forEach(({ properties }) => {
+        const errorValues = Object.values(err.errors);
+        errorValues.forEach(({ properties }) => {
             errors[properties.path] = properties.message;
         });
     }
