@@ -41,6 +41,8 @@ const Signup = () => {
     });
 
     if (response.ok) {
+      navigate("/login");
+    } else {
       const errRes: ErrorResponse = await response.json();
 
       if (usernameErrElement && errRes.errors.username) {
@@ -54,8 +56,6 @@ const Signup = () => {
       if (passwdErrElement && errRes.errors.password) {
         passwdErrElement.innerHTML = errRes.errors.password;
       }
-    } else {
-      navigate("/login");
     }
   };
 

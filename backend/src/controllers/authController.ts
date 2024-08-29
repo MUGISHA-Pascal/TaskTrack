@@ -50,8 +50,7 @@ export const login_post = async (req: Request, res: Response) => {
 
     const token = createToken(user._id.toString());
     res.cookie("jwt", token, { maxAge: maxAge * 1000 });
-    console.log(token);
-    res.status(200).json({ user });
+    res.json({ user });
   } catch (error) {
     console.log(handleError(error));
     res.status(400).json({ errors: handleError(error) });
@@ -63,8 +62,9 @@ export const signup_post = async (req: Request, res: Response) => {
     const { username, email, password } = req.body;
     const user = await new User({ username, email, password }).save();
     const token = createToken(user._id.toString());
+
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.status(201).json({ user });
+    res.json({ user });
   } catch (error) {
     res.status(400).json({ errors: handleError(error) });
   }
