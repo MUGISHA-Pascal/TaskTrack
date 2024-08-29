@@ -15,6 +15,16 @@ interface UserErrors {
 const handleError = (err: any): UserErrors => {
   const errors: UserErrors = {};
 
+  if (err.code == 11000) {
+    errors["email"] = "email arleady exists";
+  }
+  if (err.message == "incorrect username") {
+    errors["username"] = "username is invalid";
+  }
+
+  if (err.message == "incorrect password") {
+    errors["password"] = "password is invalid";
+  }
   if (err.message.includes("User validation failed")) {
     const errorValues = Object.values(err.errors) as Array<{
       properties: { path: keyof UserErrors; message: string };
@@ -38,12 +48,12 @@ export const login_post = async (req: Request, res: Response) => {
 
     const user = await User.findOne({ username });
     if (!user) {
-      throw new Error("Invalid username");
+      throw Error("incorrect username");
     }
 
     const auth = await bcrypt.compare(password, user.password);
     if (!auth) {
-      throw new Error("Invalid password");
+      throw Error("incorrect password");
     }
 
     const token = createToken(user._id.toString());
@@ -63,8 +73,7 @@ export const signup_post = async (req: Request, res: Response) => {
     const token = createToken(user._id.toString());
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(201).json({ user });
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
     res.status(400).json({ errors: handleError(error) });
   }
 };

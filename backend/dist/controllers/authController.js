@@ -20,6 +20,15 @@ const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const maxAge = 3 * 24 * 60 * 60;
 const handleError = (err) => {
     const errors = {};
+    if (err.code == 11000) {
+        errors["email"] = "email arleady exists";
+    }
+    if (err.message == "incorrect username") {
+        errors["username"] = "username is invalid";
+    }
+    if (err.message == "incorrect password") {
+        errors["password"] = "password is invalid";
+    }
     if (err.message.includes("User validation failed")) {
         const errorValues = Object.values(err.errors);
         errorValues.forEach(({ properties }) => {
@@ -36,11 +45,11 @@ const login_post = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const { username, password } = req.body;
         const user = yield user_1.default.findOne({ username });
         if (!user) {
-            throw new Error("Invalid username");
+            throw Error("incorrect username");
         }
         const auth = yield bcryptjs_1.default.compare(password, user.password);
         if (!auth) {
-            throw new Error("Invalid password");
+            throw Error("incorrect password");
         }
         const token = createToken(user._id.toString());
         res.cookie("jwt", token, { maxAge: maxAge * 1000 });
@@ -62,7 +71,6 @@ const signup_post = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.status(201).json({ user });
     }
     catch (error) {
-        console.log(error);
         res.status(400).json({ errors: handleError(error) });
     }
 });

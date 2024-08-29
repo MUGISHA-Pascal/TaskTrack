@@ -24,7 +24,6 @@ const Signup = () => {
   const handlesubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    // Clear any previous errors
     const usernameErrElement = document.getElementById("usernameError");
     const emailErrElement = document.getElementById("emailError");
     const passwdErrElement = document.getElementById("passwordError");

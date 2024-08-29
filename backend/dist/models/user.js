@@ -38,5 +38,22 @@ userSchema.pre("save", function (next) {
         next();
     });
 });
+userSchema.statics.login = function (username, password) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const user = yield this.findOne({ username });
+        if (user) {
+            const auth = yield bcryptjs_1.default.compare(password, user.password);
+            if (auth) {
+                return user;
+            }
+            else {
+                throw Error("incorrect password");
+            }
+        }
+        else {
+            throw Error("incorrect username");
+        }
+    });
+};
 const User = (0, mongoose_1.model)("User", userSchema);
 exports.default = User;
