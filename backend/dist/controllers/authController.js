@@ -37,7 +37,7 @@ const handleError = (err) => {
     return errors;
 };
 const createToken = (id) => {
-    return jsonwebtoken_1.default.sign({ id }, keys_1.default.jwt_key, { expiresIn: "1h" });
+    return jsonwebtoken_1.default.sign({ id }, keys_1.default.jwt_key, { expiresIn: "1d" });
 };
 const login_post = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -45,6 +45,7 @@ const login_post = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const user = yield user_1.default.login(username, password);
         const token = createToken(user._id.toString());
         res.cookie("jwt", token, { maxAge: maxAge * 1000 });
+        console.log(token);
         res.json({ user });
     }
     catch (error) {
@@ -58,7 +59,7 @@ const signup_post = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const { username, email, password } = req.body;
         const user = yield new user_1.default({ username, email, password }).save();
         const token = createToken(user._id.toString());
-        res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
+        res.cookie("jwt", token, { maxAge: maxAge * 1000 });
         res.json({ user });
     }
     catch (error) {

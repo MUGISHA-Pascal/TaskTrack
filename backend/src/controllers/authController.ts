@@ -2,9 +2,9 @@ import { Response, Request } from "express";
 import jwt from "jsonwebtoken";
 import User from "../models/user";
 import keys from "../keys";
-import bcrypt from "bcryptjs";
 
 const maxAge = 3 * 24 * 60 * 60;
+// const expirationDate = new Date(Date.now() + maxAge);
 
 interface UserErrors {
   username?: string;
@@ -39,7 +39,7 @@ const handleError = (err: any): UserErrors => {
 };
 
 const createToken = (id: string): string => {
-  return jwt.sign({ id }, keys.jwt_key, { expiresIn: "1h" });
+  return jwt.sign({ id }, keys.jwt_key, { expiresIn: "1d" });
 };
 
 export const login_post = async (req: Request, res: Response) => {
@@ -50,6 +50,7 @@ export const login_post = async (req: Request, res: Response) => {
 
     const token = createToken(user._id.toString());
     res.cookie("jwt", token, { maxAge: maxAge * 1000 });
+    console.log(token);
     res.json({ user });
   } catch (error) {
     console.log(handleError(error));
@@ -63,7 +64,7 @@ export const signup_post = async (req: Request, res: Response) => {
     const user = await new User({ username, email, password }).save();
     const token = createToken(user._id.toString());
 
-    res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
+    res.cookie("jwt", token, { maxAge: maxAge * 1000 });
     res.json({ user });
   } catch (error) {
     res.status(400).json({ errors: handleError(error) });
