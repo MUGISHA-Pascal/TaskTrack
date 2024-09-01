@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/user";
 import keys from "../keys";
 
-const maxAge = 3 * 24 * 60 * 60;
+const maxAge = 24 * 60 * 60;
 // const expirationDate = new Date(Date.now() + maxAge);
 
 interface UserErrors {
@@ -69,4 +69,9 @@ export const signup_post = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(400).json({ errors: handleError(error) });
   }
+};
+
+export const logout = async (req: Request, res: Response) => {
+  res.cookie("jwt", "", { maxAge: 1 });
+  res.redirect("/");
 };

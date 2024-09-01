@@ -15,6 +15,9 @@ const todoSchema = new Schema(
       type: Boolean,
       // required: true,
     },
+    userId: {
+      type: String,
+    },
   },
   {
     timestamps: true,
