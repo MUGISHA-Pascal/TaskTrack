@@ -8,9 +8,13 @@ import authRoutes from "./routes/authRoutes";
 
 const app: Express = express();
 mongoose.connect(keys.mongoURL);
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+};
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use("/task", taskRoutes);
 app.use("/auth", authRoutes);
 app.listen(4000, () => {

@@ -16,7 +16,7 @@ exports.logout = exports.signup_post = exports.login_post = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_1 = __importDefault(require("../models/user"));
 const keys_1 = __importDefault(require("../keys"));
-const maxAge = 3 * 24 * 60 * 60;
+const maxAge = 24 * 60 * 60;
 const handleError = (err) => {
     const errors = {};
     if (err.code == 11000) {

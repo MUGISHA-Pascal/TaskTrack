@@ -14,10 +14,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.update_status = exports.delete_task = exports.update_task = exports.get_all_task = exports.get_task = exports.add_task = void 0;
 const todo_1 = __importDefault(require("../models/todo"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const add_task = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name, description, status } = req.body;
-        const todos = yield new todo_1.default({ name, description, status }).save();
+        const token = req.cookies.jwt;
+        const decoded = (yield jsonwebtoken_1.default.decode(token));
+        const userId = decoded.id;
+        const todos = yield new todo_1.default({ name, description, status, userId }).save();
         const allTodos = yield todo_1.default.find();
         res
             .status(201)
@@ -31,7 +35,10 @@ exports.add_task = add_task;
 const get_task = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.body;
-        const todos = yield todo_1.default.findById({ _id: id });
+        const token = req.cookies.jwt;
+        const decoded = (yield jsonwebtoken_1.default.decode(token));
+        const userId = decoded.id;
+        const todos = yield todo_1.default.findById({ userId, _id: id });
         res.status(201).json({ todos });
     }
     catch (error) {
@@ -41,7 +48,10 @@ const get_task = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.get_task = get_task;
 const get_all_task = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const todos = yield todo_1.default.find();
+        const token = req.cookies.jwt;
+        const decoded = (yield jsonwebtoken_1.default.decode(token));
+        const userId = decoded.id;
+        const todos = yield todo_1.default.find({ userId });
         res.status(201).json({ todos });
     }
     catch (error) {

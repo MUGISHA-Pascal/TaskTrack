@@ -14,6 +14,9 @@ const todoSchema = new mongoose_1.Schema({
         type: Boolean,
         // required: true,
     },
+    userId: {
+        type: String,
+    },
 }, {
     timestamps: true,
 });

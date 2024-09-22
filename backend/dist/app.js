@@ -12,9 +12,13 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
 const app = (0, express_1.default)();
 mongoose_1.default.connect(keys_1.default.mongoURL);
+const corsOptions = {
+    origin: "http://localhost:3000",
+    credentials: true,
+};
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.json());
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)(corsOptions));
 app.use("/task", taskRoutes_1.default);
 app.use("/auth", authRoutes_1.default);
 app.listen(4000, () => {
