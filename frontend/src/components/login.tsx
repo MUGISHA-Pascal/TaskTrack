@@ -18,10 +18,15 @@ const Login = () => {
     });
 
     if (response.ok) {
-      const result = await response.json();
-      if (result) {
-        navigate("/tasks");
-      }
+      type user = {
+        _id: string;
+        username: string;
+        email: string;
+      };
+      const result: Promise<user> = await response.json();
+      localStorage.setItem("user", JSON.stringify({ result }));
+
+      navigate("/tasks");
     } else {
       const err: { errors: any } = await response.json();
       const usernameErrElement = document.getElementById("usernameError");
