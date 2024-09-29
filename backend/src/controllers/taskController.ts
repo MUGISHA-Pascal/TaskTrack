@@ -4,10 +4,10 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 
 export const add_task = async (req: Request, res: Response) => {
   try {
-    const { name, description, status } = req.body;
-    const token = req.cookies.jwt;
-    const decoded = (await jwt.decode(token)) as JwtPayload;
-    const userId = decoded.id;
+    const { name, description, status, userId } = req.body;
+    // const token = req.cookies.jwt;
+    // const decoded = (await jwt.decode(token)) as JwtPayload;
+    // const userId = decoded.id;
     const todos = await new Todo({ name, description, status, userId }).save();
     const allTodos = await Todo.find();
     res
@@ -33,9 +33,7 @@ export const get_task = async (req: Request, res: Response) => {
 
 export const get_all_task = async (req: Request, res: Response) => {
   try {
-    const token = req.cookies.jwt;
-    const decoded = (await jwt.decode(token)) as JwtPayload;
-    const userId = decoded.id;
+    const { userId } = req.params;
     const todos = await Todo.find({ userId });
     res.status(201).json({ todos });
   } catch (error) {

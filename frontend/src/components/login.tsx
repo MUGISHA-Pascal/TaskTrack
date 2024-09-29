@@ -8,7 +8,6 @@ const Login = () => {
   const [username, setname] = useState("");
   const handlesubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log(username);
     const response = await fetch(`${baseURL}/login`, {
       method: "POST",
       headers: {

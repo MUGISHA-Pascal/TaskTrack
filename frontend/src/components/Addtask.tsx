@@ -20,69 +20,96 @@ const Addtask: React.FC = () => {
   });
 
   useEffect(() => {
-    fetch(`${baseURL}/get_all_task`)
-      .then((response) => response.json())
-      .then((data) => {
-        setTodos(data.todos);
-      })
-      .catch((error) => {
-        console.error("Error fetching tasks:", error);
-      });
+    const dataString: string | null = localStorage.getItem("user");
+    if (dataString !== null) {
+      const data = JSON.parse(dataString);
+      const userId = data.result.user._id;
+
+      fetch(`${baseURL}/get_all_task?userId=${userId}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setTodos(data.todos);
+        })
+        .catch((error) => {
+          console.error("Error fetching tasks:", error);
+        });
+    }
   }, []);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    const dataString: string | null = localStorage.getItem("user");
+    if (dataString !== null) {
+      const data = JSON.parse(dataString);
+      const userId = data.result.user._id;
 
-    const newPostTodo = { name, description, status: false };
-    setPostTodo(newPostTodo);
+      const newPostTodo = { name, description, status: false, userId };
+      setPostTodo(newPostTodo);
 
-    try {
-      const postData = await fetch(`${baseURL}/add_task`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newPostTodo),
-      });
+      try {
+        const postData = await fetch(`${baseURL}/add_task`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newPostTodo),
+        });
 
-      if (!postData.ok) {
-        throw new Error("Network response was not ok");
+        if (!postData.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const result = await postData.json();
+        console.log("Task added:", result);
+
+        const updatedTasks = await fetch(
+          `${baseURL}/get_all_task?userId=${userId}`
+        );
+        const updatedData = await updatedTasks.json();
+        setTodos(updatedData.todos);
+
+        setName("");
+        setDescription("");
+      } catch (error) {
+        console.error("Error adding task:", error);
       }
-
-      const result = await postData.json();
-      console.log("Task added:", result);
-
-      const updatedTasks = await fetch(`${baseURL}/get_all_task`);
-      const updatedData = await updatedTasks.json();
-      setTodos(updatedData.todos);
-
-      setName("");
-      setDescription("");
-    } catch (error) {
-      console.error("Error adding task:", error);
     }
   };
 
   const handleComplete = async (id: string) => {
-    const pos = await fetch(`${baseURL}/update_status_task`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: id, status: true }),
-    });
-    const resu = await pos.json();
-    const updatedTasks = await fetch(`${baseURL}/get_all_task`);
-    const updatedData = await updatedTasks.json();
-    setTodos(updatedData.todos);
+    const dataString: string | null = localStorage.getItem("user");
+    if (dataString !== null) {
+      const data = JSON.parse(dataString);
+      const userId = data.result.user._id;
+      const pos = await fetch(`${baseURL}/update_status_task`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: id, status: true }),
+      });
+      const resu = await pos.json();
+      const updatedTasks = await fetch(
+        `${baseURL}/get_all_task?userId=${userId}`
+      );
+      const updatedData = await updatedTasks.json();
+      setTodos(updatedData.todos);
+    }
   };
 
   const handleDelete = async (id: string) => {
-    const response = await fetch(`${baseURL}/delete_task`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id }),
-    });
-    const updatedTasks = await fetch(`${baseURL}/get_all_task`);
-    const updatedData = await updatedTasks.json();
+    const dataString: string | null = localStorage.getItem("user");
+    if (dataString !== null) {
+      const data = JSON.parse(dataString);
+      const userId = data.result.user._id;
+      const response = await fetch(`${baseURL}/delete_task`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id }),
+      });
+      const updatedTasks = await fetch(
+        `${baseURL}/get_all_task?userId=${userId}`
+      );
+      const updatedData = await updatedTasks.json();
 
-    setTodos(updatedData.todos);
+      setTodos(updatedData.todos);
+    }
   };
 
   return (
