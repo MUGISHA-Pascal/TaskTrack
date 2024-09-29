@@ -1,13 +1,9 @@
 import { Request, Response } from "express";
 import Todo from "../models/todo";
-import jwt, { JwtPayload } from "jsonwebtoken";
 
 export const add_task = async (req: Request, res: Response) => {
   try {
     const { name, description, status, userId } = req.body;
-    // const token = req.cookies.jwt;
-    // const decoded = (await jwt.decode(token)) as JwtPayload;
-    // const userId = decoded.id;
     const todos = await new Todo({ name, description, status, userId }).save();
     const allTodos = await Todo.find();
     res
@@ -20,10 +16,7 @@ export const add_task = async (req: Request, res: Response) => {
 
 export const get_task = async (req: Request, res: Response) => {
   try {
-    const { id } = req.body;
-    const token = req.cookies.jwt;
-    const decoded = (await jwt.decode(token)) as JwtPayload;
-    const userId = decoded.id;
+    const { id, userId } = req.body;
     const todos = await Todo.findById({ userId, _id: id });
     res.status(201).json({ todos });
   } catch (error) {
@@ -33,7 +26,8 @@ export const get_task = async (req: Request, res: Response) => {
 
 export const get_all_task = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.params;
+    const userId = req.query.userId as string;
+    console.log(userId);
     const todos = await Todo.find({ userId });
     res.status(201).json({ todos });
   } catch (error) {

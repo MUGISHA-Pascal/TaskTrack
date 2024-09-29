@@ -8,7 +8,7 @@ interface ITodo {
 }
 
 const Addtask: React.FC = () => {
-  const baseURL = "http://localhost:4000/task";
+  const baseURL = "https://tasktrack-pd2m.onrender.com/tasks";
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [todos, setTodos] = useState<ITodo[]>([]);
@@ -65,6 +65,7 @@ const Addtask: React.FC = () => {
         );
         const updatedData = await updatedTasks.json();
         setTodos(updatedData.todos);
+        console.log(updatedData.todos);
 
         setName("");
         setDescription("");
