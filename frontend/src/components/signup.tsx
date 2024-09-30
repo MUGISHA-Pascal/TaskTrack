@@ -41,14 +41,18 @@ const Signup = () => {
     });
 
     if (response.ok) {
+      console.log(response.json);
       type user = {
         _id: string;
         username: string;
         email: string;
       };
       const result: Promise<user> = await response.json();
-      localStorage.setItem("user", JSON.stringify({ result }));
-      navigate("/login");
+      if (result) {
+        console.log(result);
+        localStorage.setItem("user", JSON.stringify({ result }));
+        navigate("/login");
+      }
     } else {
       const errRes: ErrorResponse = await response.json();
 

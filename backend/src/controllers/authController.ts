@@ -43,8 +43,10 @@ const createToken = (id: string): string => {
 };
 
 export const login_post = async (req: Request, res: Response) => {
+  console.log("Hello rendering on render.com");
   try {
     const { username, password } = req.body;
+    console.log("username is ", username);
 
     const user = await User.login(username, password);
 
