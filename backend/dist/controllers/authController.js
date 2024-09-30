@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.logout = exports.signup_post = exports.login_post = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_1 = __importDefault(require("../models/user"));
-const keys_1 = __importDefault(require("../keys"));
 const maxAge = 24 * 60 * 60;
 const handleError = (err) => {
     const errors = {};
@@ -37,7 +36,7 @@ const handleError = (err) => {
     return errors;
 };
 const createToken = (id) => {
-    return jsonwebtoken_1.default.sign({ id }, keys_1.default.jwt_key, { expiresIn: "1d" });
+    return jsonwebtoken_1.default.sign({ id }, process.env.jwt_key, { expiresIn: "1d" });
 };
 const login_post = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Hello rendering on render.com");

@@ -1,7 +1,6 @@
 import { Response, Request } from "express";
 import jwt from "jsonwebtoken";
 import User from "../models/user";
-import keys from "../keys";
 
 const maxAge = 24 * 60 * 60;
 // const expirationDate = new Date(Date.now() + maxAge);
@@ -39,7 +38,7 @@ const handleError = (err: any): UserErrors => {
 };
 
 const createToken = (id: string): string => {
-  return jwt.sign({ id }, keys.jwt_key, { expiresIn: "1d" });
+  return jwt.sign({ id }, process.env.jwt_key as string, { expiresIn: "1d" });
 };
 
 export const login_post = async (req: Request, res: Response) => {
