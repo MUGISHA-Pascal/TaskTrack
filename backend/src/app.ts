@@ -9,23 +9,21 @@ import authRoutes from "./routes/authRoutes";
 
 const app: Express = express();
 dotenv.config();
-try {
-  mongoose.connect(
-    "mongodb+srv://pascal:tasktrack@tasktrack.9wydl.mongodb.net/?retryWrites=true&w=majority&appName=tasktrack"
-  );
-  console.log("Connected to the database");
-} catch (error) {
-  console.log("an error occured while connecting");
-}
-const corsOptions = {
-  origin: "https://task-track-peach.vercel.app/",
-  credentials: true,
+
+const connect = async () => {
+  console.log("hello database");
+  await mongoose.connect(process.env.MONGODB_URI as string).then(() => {
+    console.log("connected");
+  });
 };
+connect();
+
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors(corsOptions));
+app.use(cors());
 app.use("/tasks", taskRoutes);
 app.use("/auth", authRoutes);
-app.listen(process.env.PORT || 4000, () => {
-  console.log("app is running on");
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log("app is running on on port ", PORT);
 });

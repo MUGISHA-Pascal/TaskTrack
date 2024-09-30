@@ -40,8 +40,10 @@ const createToken = (id) => {
     return jsonwebtoken_1.default.sign({ id }, keys_1.default.jwt_key, { expiresIn: "1d" });
 };
 const login_post = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("Hello rendering on render.com");
     try {
         const { username, password } = req.body;
+        console.log("username is ", username);
         const user = yield user_1.default.login(username, password);
         const token = createToken(user._id.toString());
         res.cookie("jwt", token, { maxAge: maxAge * 1000 });
