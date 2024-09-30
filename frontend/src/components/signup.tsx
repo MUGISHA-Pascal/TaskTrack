@@ -54,6 +54,7 @@ const Signup = () => {
         navigate("/login");
       }
     } else {
+      console.log("an Error occured");
       const errRes: ErrorResponse = await response.json();
 
       if (usernameErrElement && errRes.errors.username) {
