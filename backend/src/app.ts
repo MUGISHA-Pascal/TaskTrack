@@ -2,7 +2,7 @@ import express, { Express, Request, Response } from "express";
 import mongoose from "mongoose";
 import keys from "./keys";
 import taskRoutes from "./routes/taskRoutes";
-import cors from "cors";
+// import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/authRoutes";
 
@@ -16,7 +16,7 @@ mongoose.connect(
 // };
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
 app.use("/tasks", taskRoutes);
 app.use("/auth", authRoutes);
 app.listen(4000, () => {
