@@ -39,6 +39,9 @@ const Signup = () => {
       },
       body: JSON.stringify({ username, email, password }),
     });
+    setname("");
+    setemail("");
+    setpwd("");
 
     if (response.ok) {
       console.log(response.json);

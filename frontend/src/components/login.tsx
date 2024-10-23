@@ -15,6 +15,8 @@ const Login = () => {
       },
       body: JSON.stringify({ username, password }),
     });
+    setname("");
+    setpwd("");
 
     if (response.ok) {
       type user = {
