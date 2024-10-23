@@ -36,7 +36,7 @@ const HomePage = () => {
         </section>
         <section
           id="features"
-          className="flex bg-gray-100 pt-[70px] pb-[80px] flex-col justify-center items-center p-[10px] space-y-[40px]"
+          className="flex bg-gray-100 pt-[70px] pb-[100px] flex-col justify-center items-center p-[10px] space-y-[40px]"
         >
           <div className="flex flex-col items-center justify-center">
             <p className="font-bold text-[15px] text-gray-600">Feature</p>
@@ -79,6 +79,26 @@ const HomePage = () => {
                 This application is completely free without any charges
               </p>
             </div>
+          </div>
+        </section>
+        <section
+          id="superiority"
+          className="flex flex-row pb-[100px] space-x-[140px] bg-white pt-[100px] items-center justify-center"
+        >
+          <div className="bg-gray-400 h-[300px] w-[300px]"></div>
+          <div className="flex flex-col items-center justify-center space-y-[30px]">
+            <div className="flex flex-col items-center justify-center">
+              <p className="font-bold text-[15px] text-gray-600">Feature</p>
+              <h2 className="font-bold text-[25px]">Our Special Feature</h2>
+            </div>
+            <p className="text-gray-400 text-[12px] w-[300px]">
+              Tasking is very easy to use ,bedides that it also has many
+              excellent features that other task manager applications don't have
+              , so task management can be done easily
+            </p>
+            <button className="rounded-[10px] text-white bg-gray-400 p-[7px] flex justify-center hover:bg-opacity-80 w-[100px] font-bold mr-4">
+              Learn more
+            </button>
           </div>
         </section>
       </div>
