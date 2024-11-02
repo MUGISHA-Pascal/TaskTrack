@@ -4,6 +4,7 @@ import { HiMiniUsers } from "react-icons/hi2";
 import { IoShieldCheckmark } from "react-icons/io5";
 import { TiDocumentText } from "react-icons/ti";
 import { TbCirclePercentageFilled } from "react-icons/tb";
+import { GoArrowRight } from "react-icons/go";
 const HomePage = () => {
   return (
     <>
@@ -132,40 +133,59 @@ const HomePage = () => {
           <div className="flex flex-row space-x-[20px] items-center justify-center">
             <div className="bg-white flex flex-col space-y-[10px] shadow-md rounded-[10px] w-[250px] p-[10px]">
               <div className="h-[200px] bg-gray-300 w-full flex justify-center rounded-[5px] items-center"></div>
-              <h1 className="font-md text-gray-500 text-[14px]">Technology</h1>
-              <p className="text-gray-400 text-[12px] w-[170px]">
-                Easy to use for people who are either new or professional
+              <h1 className="font-md text-gray-500 text-[12px]">TECHNOLOGY</h1>
+              <p className="text-gray-900 text-[17px] w-[170px] font-bold">
+                Easy to use for peop
               </p>
+              <button className=" font-bold text-[14px] w-[170px] p-[10px] flex flex-row space-x-[10px] items-start">
+                <p>read more</p>
+                <div className="mt-[5px]">
+                  <GoArrowRight />
+                </div>
+              </button>
             </div>
-            <div className="h-[150px]  bg-white flex flex-col space-y-[10px] justify-center shadow-md rounded-[10px] w-[200px] items-center">
-              <div className="h-[30px] w-[30px] bg-gray-100 flex justify-center rounded-[5px] items-center">
-                <IoShieldCheckmark />
-              </div>
-              <h1 className="font-bold">Trusted app</h1>
-              <p className="text-gray-400 text-[12px] w-[170px]">
-                Official application that is trusted for security
+            <div className="bg-white flex flex-col space-y-[10px] shadow-md rounded-[10px] w-[250px] p-[10px]">
+              <div className="h-[200px] bg-gray-300 w-full flex justify-center rounded-[5px] items-center"></div>
+              <h1 className="font-md text-gray-500 text-[12px]">TECHNOLOGY</h1>
+              <p className="text-gray-900 text-[17px] w-[170px] font-bold">
+                Easy to use for peop
               </p>
+              <button className=" font-bold text-[14px] w-[170px] p-[10px] flex flex-row space-x-[10px] items-start">
+                <p>read more</p>
+                <div className="mt-[5px]">
+                  <GoArrowRight />
+                </div>
+              </button>
             </div>
-            <div className="h-[150px] w-[200px] bg-white flex flex-col space-y-[10px] justify-center shadow-md rounded-[10px] items-center">
-              <div className="h-[30px] w-[30px] bg-gray-100 flex justify-center rounded-[5px] items-center">
-                <TiDocumentText />
-              </div>
-              <h1 className="font-bold">Flexibility</h1>
-              <p className="text-gray-400 text-[12px] w-[170px]">
-                Tasking can be opened on all existing devices
+            <div className="bg-white flex flex-col space-y-[10px] shadow-md rounded-[10px] w-[250px] p-[10px]">
+              <div className="h-[200px] bg-gray-300 w-full flex justify-center rounded-[5px] items-center"></div>
+              <h1 className="font-md text-gray-500 text-[12px]">TECHNOLOGY</h1>
+              <p className="text-gray-900 text-[17px] w-[170px] font-bold">
+                Easy to use for peop
               </p>
+              <button className=" font-bold text-[14px] w-[170px] p-[10px] flex flex-row space-x-[10px] items-start">
+                <p>read more</p>
+                <div className="mt-[5px]">
+                  <GoArrowRight />
+                </div>
+              </button>
             </div>
-            <div className="h-[150px] w-[200px] bg-white flex flex-col space-y-[10px] justify-center shadow-md rounded-[10px] items-center">
-              <div className="h-[30px] w-[30px] bg-gray-100 flex justify-center rounded-[5px] items-center">
-                <TbCirclePercentageFilled />
-              </div>
-              <h1 className="font-bold">100% Free</h1>
-              <p className="text-gray-400 text-[12px] w-[170px]">
-                This application is completely free without any charges
+            <div className="bg-white flex flex-col space-y-[10px] shadow-md rounded-[10px] w-[250px] p-[10px]">
+              <div className="h-[200px] bg-gray-300 w-full flex justify-center rounded-[5px] items-center"></div>
+              <h1 className="font-md text-gray-500 text-[12px]">TECHNOLOGY</h1>
+              <p className="text-gray-900 text-[17px] w-[170px] font-bold">
+                Easy to use for peop
               </p>
+              <button className=" font-bold text-[14px] w-[170px] p-[10px] flex flex-row space-x-[10px] items-start">
+                <p>read more</p>
+                <div className="mt-[5px]">
+                  <GoArrowRight />
+                </div>
+              </button>
             </div>
           </div>
         </section>
+        <footer></footer>
       </div>
     </>
   );
