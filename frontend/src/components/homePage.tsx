@@ -5,6 +5,10 @@ import { IoShieldCheckmark } from "react-icons/io5";
 import { TiDocumentText } from "react-icons/ti";
 import { TbCirclePercentageFilled } from "react-icons/tb";
 import { GoArrowRight } from "react-icons/go";
+import { FaFacebook } from "react-icons/fa";
+import { IoLogoLinkedin } from "react-icons/io5";
+import { FaXTwitter } from "react-icons/fa6";
+
 const HomePage = () => {
   return (
     <>
@@ -22,7 +26,7 @@ const HomePage = () => {
               features to make the most of them
             </p>
             <div className="flex flex-row space-x-[20px]">
-              <button className="rounded-[10px] text-white bg-gray-400 p-[7px] flex justify-center hover:bg-opacity-80 w-[100px] font-bold mr-4">
+              <button className="rounded-[10px] text-white bg-gray-400 p-[7px]  flex justify-center hover:bg-opacity-80 w-[120px] font-bold mr-4">
                 Learn more
               </button>
               <button className="flex flex-row space-x-[10px] justify-center items-center text-[25px] text-gray-400">
@@ -193,7 +197,11 @@ const HomePage = () => {
                 Use the shortest possible to create tasks, use all the free
                 features to make the most of them
               </p>
-              <div className="grid grid-cols-3"></div>
+              <div className="flex flex-row pt-[10px] space-x-[10px] text-[22px]">
+                <FaFacebook />
+                <IoLogoLinkedin />
+                <FaXTwitter />
+              </div>
             </div>
             <div className="flex flex-col space-y-[10px]">
               <h2 className="font-bold text-[20px]">About</h2>
@@ -234,7 +242,7 @@ const HomePage = () => {
           </div>
           <div className="flex flex-col space-y-[10px] items-center">
             <div className="border-t-[1px] border-gray-300 w-[1000px]"></div>
-            <p>All rights reserved @tasking.co</p>
+            <p>All rights reserved @TaskTrack</p>
           </div>
         </footer>
       </div>
