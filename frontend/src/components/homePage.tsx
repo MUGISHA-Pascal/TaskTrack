@@ -185,7 +185,58 @@ const HomePage = () => {
             </div>
           </div>
         </section>
-        <footer></footer>
+        <footer className="p-[30px] pb-[20px] pt-[40px] text-white bg-gray-400 flex flex-col space-y-[30px]">
+          <div className="w-full flex flex-row space-x-[120px] items-start justify-center">
+            <div className="flex flex-col space-y-[10px]">
+              <h2 className="font-bold text-[30px]">Tasking</h2>
+              <p className="w-[200px] text-gray-200">
+                Use the shortest possible to create tasks, use all the free
+                features to make the most of them
+              </p>
+              <div className="grid grid-cols-3"></div>
+            </div>
+            <div className="flex flex-col space-y-[10px]">
+              <h2 className="font-bold text-[20px]">About</h2>
+              <a href="#" className="text-gray-200">
+                About Us
+              </a>
+              <a href="#" className="text-gray-200">
+                Features
+              </a>
+              <a href="#" className="text-gray-200">
+                News & Articles
+              </a>
+            </div>
+            <div className="flex flex-col space-y-[10px]">
+              <h2 className="font-bold text-[20px]">Support Us</h2>
+              <a href="#" className="text-gray-200">
+                FAQ's
+              </a>
+              <a href="#" className="text-gray-200">
+                Contact us
+              </a>
+              <a href="#" className="text-gray-200">
+                Support Center
+              </a>
+              <a href="#" className="text-gray-200">
+                Security
+              </a>
+            </div>
+            <div className="flex flex-col space-y-[10px]">
+              <h2 className="font-bold text-[20px]">Partner</h2>
+              <a href="#" className="text-gray-200">
+                Our Partner
+              </a>
+              <a href="#" className="text-gray-200">
+                Subscribe
+              </a>
+            </div>
+          </div>
+          <div className="flex flex-col space-y-[10px] items-center">
+            <div className="border-t-[1px] border-gray-300 w-[1000px]"></div>
+            <p>All rights reserved @tasking.co</p>
+          </div>
+        </footer>
       </div>
     </>
   );
