@@ -8,6 +8,7 @@ import { GoArrowRight } from "react-icons/go";
 import { FaFacebook } from "react-icons/fa";
 import { IoLogoLinkedin } from "react-icons/io5";
 import { FaXTwitter } from "react-icons/fa6";
+import AboutImage from "../assets/about.png";
 
 const HomePage = () => {
   return (
@@ -37,7 +38,9 @@ const HomePage = () => {
               </button>
             </div>
           </div>
-          <div className="bg-gray-500 w-[300px] h-[400px]"></div>
+          <div className="bg-gray-500 w-[340px] h-auto">
+            <img src={AboutImage} alt="about image" />
+          </div>
         </section>
         <section
           id="features"
@@ -93,8 +96,10 @@ const HomePage = () => {
           <div className="bg-gray-400 h-[300px] w-[300px]"></div>
           <div className="flex flex-col items-center justify-center space-y-[30px]">
             <div className="flex flex-col items-center justify-center">
-              <p className="font-bold text-[15px] text-gray-600">Feature</p>
-              <h2 className="font-bold text-[25px]">Our Special Feature</h2>
+              <p className="font-bold text-[15px] text-gray-600">Superiority</p>
+              <h2 className="font-bold text-[25px]">
+                Smart system & friendly interface
+              </h2>
             </div>
             <p className="text-gray-400 text-[12px] w-[300px]">
               Tasking is very easy to use ,bedides that it also has many
@@ -112,13 +117,17 @@ const HomePage = () => {
         >
           <div className="flex flex-col items-center justify-center space-y-[30px]">
             <div className="flex flex-col items-center justify-center">
-              <p className="font-bold text-[15px] text-gray-600">Feature</p>
-              <h2 className="font-bold text-[25px]">Our Special Feature</h2>
+              <p className="font-bold text-[15px] text-gray-600">
+                How it works
+              </p>
+              <h2 className="font-bold text-[25px]">
+                How tasking work? We have 3 option
+              </h2>
             </div>
             <p className="text-gray-400 text-[12px] w-[300px]">
-              Tasking is very easy to use ,bedides that it also has many
-              excellent features that other task manager applications don't have
-              , so task management can be done easily
+              if you ever find anything hard, we get 3 option for your 10+
+              Readable Documents, Tutorial Videos that you can access anywhere,
+              and 24/7 Customer Service
             </p>
             <button className="rounded-[10px] text-white bg-gray-400 p-[7px] flex justify-center hover:bg-opacity-80 w-[100px] font-bold mr-4">
               Learn more
