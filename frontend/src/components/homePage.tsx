@@ -9,13 +9,13 @@ import { FaFacebook } from "react-icons/fa";
 import { IoLogoLinkedin } from "react-icons/io5";
 import { FaXTwitter } from "react-icons/fa6";
 import AboutImage from "../assets/about.png";
-
+import { Element } from "react-scroll";
 const HomePage = () => {
   return (
     <>
       <div className="flex flex-col w-full">
-        <section
-          id="manage"
+        <Element
+          name="about"
           className="flex mt-[100px] items-center justify-center flex-row space-x-[100px] pb-[100px]"
         >
           <div className="flex flex-col space-y-[20px]">
@@ -41,9 +41,9 @@ const HomePage = () => {
           <div className="bg-gray-500 w-[340px] h-auto">
             <img src={AboutImage} alt="about image" />
           </div>
-        </section>
-        <section
-          id="features"
+        </Element>
+        <Element
+          name="features"
           className="flex bg-gray-100 pt-[70px] pb-[100px] flex-col justify-center items-center p-[10px] space-y-[40px]"
         >
           <div className="flex flex-col items-center justify-center">
@@ -88,9 +88,9 @@ const HomePage = () => {
               </p>
             </div>
           </div>
-        </section>
-        <section
-          id="superiority"
+        </Element>
+        <Element
+          name="superiority"
           className="flex flex-row pb-[100px] space-x-[140px] bg-white pt-[100px] items-center justify-center"
         >
           <div className="bg-gray-400 h-[300px] w-[300px]"></div>
@@ -110,9 +110,9 @@ const HomePage = () => {
               Learn more
             </button>
           </div>
-        </section>
-        <section
-          id="working"
+        </Element>
+        <Element
+          name="help"
           className="flex flex-row pb-[100px] space-x-[140px] bg-gray-100 pt-[100px] items-center justify-center"
         >
           <div className="flex flex-col items-center justify-center space-y-[30px]">
@@ -134,7 +134,7 @@ const HomePage = () => {
             </button>
           </div>
           <div className="bg-gray-400 h-[300px] w-[300px]"></div>
-        </section>
+        </Element>
         <section
           id="features"
           className="flex bg-white pt-[70px] pb-[100px] flex-col justify-center items-center p-[10px] space-y-[40px]"
