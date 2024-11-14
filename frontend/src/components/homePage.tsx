@@ -10,6 +10,8 @@ import { IoLogoLinkedin } from "react-icons/io5";
 import { FaXTwitter } from "react-icons/fa6";
 import AboutImage from "../assets/about.png";
 import { Element } from "react-scroll";
+import superImage from "../assets/superImage.png";
+import helpImage from "../assets/help.png";
 const HomePage = () => {
   return (
     <>
@@ -22,12 +24,12 @@ const HomePage = () => {
             <p className="font-normal text-[70px] leading-[90px] w-[400px]">
               Manage your <span className="text-gray-400">Tasks</span> Quickly
             </p>
-            <p className="text-gray-400 text-[12px] w-[300px]">
+            <p className="text-gray-400 text-[13px] w-[300px]">
               Use the shortest possible time to create tasks, use all the free
               features to make the most of them
             </p>
             <div className="flex flex-row space-x-[20px]">
-              <button className="rounded-[10px] text-white bg-gray-400 p-[7px]  flex justify-center hover:bg-opacity-80 w-[120px] font-bold mr-4">
+              <button className="rounded-[12px] text-white bg-gray-400 p-[8px] px-[10px] flex justify-center hover:bg-opacity-80 w-[125px] font-semibold mr-4">
                 Learn more
               </button>
               <button className="flex flex-row space-x-[10px] justify-center items-center text-[25px] text-gray-400">
@@ -93,20 +95,24 @@ const HomePage = () => {
           name="superiority"
           className="flex flex-row pb-[100px] space-x-[140px] bg-white pt-[100px] items-center justify-center"
         >
-          <div className="bg-gray-400 h-[300px] w-[300px]"></div>
-          <div className="flex flex-col items-center justify-center space-y-[30px]">
-            <div className="flex flex-col items-center justify-center">
+          <img
+            src={superImage}
+            className="h-auto w-[300px]"
+            alt="superiosity image"
+          />
+          <div className="flex flex-col items-start justify-center space-y-[30px]">
+            <div className="flex flex-col items-start justify-center">
               <p className="font-bold text-[15px] text-gray-600">Superiority</p>
               <h2 className="font-bold text-[25px]">
                 Smart system & friendly interface
               </h2>
             </div>
-            <p className="text-gray-400 text-[12px] w-[300px]">
+            <p className="text-gray-400 leading-[23px] text-[14px] w-[300px]">
               Tasking is very easy to use ,bedides that it also has many
               excellent features that other task manager applications don't have
               , so task management can be done easily
             </p>
-            <button className="rounded-[10px] text-white bg-gray-400 p-[7px] flex justify-center hover:bg-opacity-80 w-[100px] font-bold mr-4">
+            <button className="rounded-[12px] text-white bg-gray-400 p-[8px] px-[10px] flex justify-center hover:bg-opacity-80 w-[125px] font-semibold mr-4">
               Learn more
             </button>
           </div>
@@ -115,8 +121,8 @@ const HomePage = () => {
           name="help"
           className="flex flex-row pb-[100px] space-x-[140px] bg-gray-100 pt-[100px] items-center justify-center"
         >
-          <div className="flex flex-col items-center justify-center space-y-[30px]">
-            <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col items-start justify-center space-y-[30px]">
+            <div className="flex flex-col items-start justify-center">
               <p className="font-bold text-[15px] text-gray-600">
                 How it works
               </p>
@@ -124,24 +130,28 @@ const HomePage = () => {
                 How tasking work? We have 3 option
               </h2>
             </div>
-            <p className="text-gray-400 text-[12px] w-[300px]">
+            <p className="text-gray-400 leading-[23px] text-[14px] w-[300px]">
               if you ever find anything hard, we get 3 option for your 10+
               Readable Documents, Tutorial Videos that you can access anywhere,
               and 24/7 Customer Service
             </p>
-            <button className="rounded-[10px] text-white bg-gray-400 p-[7px] flex justify-center hover:bg-opacity-80 w-[100px] font-bold mr-4">
+            <button className="rounded-[12px] text-white bg-gray-400 p-[8px] px-[10px] flex justify-center hover:bg-opacity-80 w-[125px] font-semibold mr-4">
               Learn more
             </button>
           </div>
-          <div className="bg-gray-400 h-[300px] w-[300px]"></div>
+          <img
+            src={helpImage}
+            alt="help image"
+            className="rounded-[10px] w-[300px] h-auto "
+          />
         </Element>
         <section
           id="features"
           className="flex bg-white pt-[70px] pb-[100px] flex-col justify-center items-center p-[10px] space-y-[40px]"
         >
           <div className="flex flex-col items-center justify-center">
-            <p className="font-bold text-[15px] text-gray-600">Feature</p>
-            <h2 className="font-bold text-[25px]">Our Special Feature</h2>
+            <p className="font-bold text-[15px] text-gray-600">Articles</p>
+            <h2 className="font-bold text-[25px]">Articles from tasking</h2>
           </div>
           <div className="flex flex-row space-x-[20px] items-center justify-center">
             <div className="bg-white flex flex-col space-y-[10px] shadow-md rounded-[10px] w-[250px] p-[10px]">
