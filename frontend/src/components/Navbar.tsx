@@ -60,7 +60,7 @@ const Navbar = () => {
         </div>
         <RouterLink
           to="/signup"
-          className="rounded-xl hover:cursor-pointer text-white bg-gray-400 p-[6px] flex justify-center hover:bg-opacity-80 w-[100px] font-bold mr-4"
+          className="rounded-[17px] text-white bg-gray-400 p-[5px] px-[10px] flex justify-center hover:bg-opacity-80 w-[125px] font-semibold mr-4"
         >
           SignUp
         </RouterLink>

@@ -12,10 +12,25 @@ import AboutImage from "../assets/about.png";
 import { Element } from "react-scroll";
 import superImage from "../assets/superImage.png";
 import helpImage from "../assets/help.png";
+import { MdOutlineKeyboardDoubleArrowUp } from "react-icons/md";
+import { animateScroll as scroll } from "react-scroll";
+import ArticleImage from "../assets/articles.png";
 const HomePage = () => {
+  const scrolltoTop = () => {
+    scroll.scrollToTop({
+      duration: 500,
+      smooth: "easeInOutQuad",
+    });
+  };
   return (
     <>
       <div className="flex flex-col w-full">
+        <div
+          className="bg-gray-500 fixed max-md:right-[20px] max-md:bottom-[20px] bottom-[70px] rounded-full p-[10px] z-30 right-[70px]"
+          onClick={scrolltoTop}
+        >
+          <MdOutlineKeyboardDoubleArrowUp className="text-white" />
+        </div>
         <Element
           name="about"
           className="flex mt-[100px] items-center justify-center flex-row space-x-[100px] pb-[100px]"
@@ -155,56 +170,84 @@ const HomePage = () => {
           </div>
           <div className="flex flex-row space-x-[20px] items-center justify-center">
             <div className="bg-white flex flex-col space-y-[10px] shadow-md rounded-[10px] w-[250px] p-[10px]">
-              <div className="h-[200px] bg-gray-300 w-full flex justify-center rounded-[5px] items-center"></div>
+              <img
+                src={ArticleImage}
+                alt="article image"
+                className="h-[200px]"
+              />
               <h1 className="font-md text-gray-500 text-[12px]">TECHNOLOGY</h1>
               <p className="text-gray-900 text-[17px] w-[170px] font-bold">
-                Easy to use for peop
+                Medium article
               </p>
-              <button className=" font-bold text-[14px] w-[170px] p-[10px] flex flex-row space-x-[10px] items-start">
+              <a
+                href="https://medium.com/personal-growth/the-benefit-of-single-tasking-and-how-to-get-yourself-to-do-it-9556c093ba25"
+                className=" font-bold text-[14px] w-[170px] p-[10px] flex flex-row space-x-[10px] items-start"
+              >
                 <p>read more</p>
                 <div className="mt-[5px]">
                   <GoArrowRight />
                 </div>
-              </button>
+              </a>
             </div>
             <div className="bg-white flex flex-col space-y-[10px] shadow-md rounded-[10px] w-[250px] p-[10px]">
-              <div className="h-[200px] bg-gray-300 w-full flex justify-center rounded-[5px] items-center"></div>
+              <img
+                src={ArticleImage}
+                alt="article image"
+                className="h-[200px]"
+              />{" "}
               <h1 className="font-md text-gray-500 text-[12px]">TECHNOLOGY</h1>
-              <p className="text-gray-900 text-[17px] w-[170px] font-bold">
-                Easy to use for peop
+              <p className="text-gray-900 text-[13px] w-[170px] font-bold">
+                VeryWell Mind article
               </p>
-              <button className=" font-bold text-[14px] w-[170px] p-[10px] flex flex-row space-x-[10px] items-start">
+              <a
+                href="https://www.verywellmind.com/multitasking-2795003"
+                className=" font-bold text-[14px] w-[170px] p-[10px] flex flex-row space-x-[10px] items-start"
+              >
                 <p>read more</p>
                 <div className="mt-[5px]">
                   <GoArrowRight />
                 </div>
-              </button>
+              </a>
             </div>
             <div className="bg-white flex flex-col space-y-[10px] shadow-md rounded-[10px] w-[250px] p-[10px]">
-              <div className="h-[200px] bg-gray-300 w-full flex justify-center rounded-[5px] items-center"></div>
+              <img
+                src={ArticleImage}
+                alt="article image"
+                className="h-[200px]"
+              />{" "}
               <h1 className="font-md text-gray-500 text-[12px]">TECHNOLOGY</h1>
               <p className="text-gray-900 text-[17px] w-[170px] font-bold">
-                Easy to use for peop
+                Forbes article
               </p>
-              <button className=" font-bold text-[14px] w-[170px] p-[10px] flex flex-row space-x-[10px] items-start">
+              <a
+                href="https://www.forbes.com/sites/curtsteinhorst/2020/02/20/how-multitasking-erodes-productivity-and-dings-your-iq/"
+                className=" font-bold text-[14px] w-[170px] p-[10px] flex flex-row space-x-[10px] items-start"
+              >
                 <p>read more</p>
                 <div className="mt-[5px]">
                   <GoArrowRight />
                 </div>
-              </button>
+              </a>
             </div>
             <div className="bg-white flex flex-col space-y-[10px] shadow-md rounded-[10px] w-[250px] p-[10px]">
-              <div className="h-[200px] bg-gray-300 w-full flex justify-center rounded-[5px] items-center"></div>
+              <img
+                src={ArticleImage}
+                alt="article image"
+                className="h-[200px]"
+              />{" "}
               <h1 className="font-md text-gray-500 text-[12px]">TECHNOLOGY</h1>
-              <p className="text-gray-900 text-[17px] w-[170px] font-bold">
-                Easy to use for peop
+              <p className="text-gray-900 text-[13px] w-[170px] font-bold">
+                BROWNHealth article
               </p>
-              <button className=" font-bold text-[14px] w-[170px] p-[10px] flex flex-row space-x-[10px] items-start">
+              <a
+                href="https://www.brownhealth.org/be-well/multitasking-and-how-it-affects-your-brain-health"
+                className=" font-bold text-[14px] w-[170px] p-[10px] flex flex-row space-x-[10px] items-start"
+              >
                 <p>read more</p>
                 <div className="mt-[5px]">
                   <GoArrowRight />
                 </div>
-              </button>
+              </a>
             </div>
           </div>
         </section>
