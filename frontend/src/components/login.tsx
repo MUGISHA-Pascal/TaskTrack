@@ -10,6 +10,7 @@ const Login = () => {
     e.preventDefault();
     const response = await fetch(`${baseURL}/login`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
